@@ -5,7 +5,6 @@ import { Button } from "@material-ui/core";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-
 import firebase from 'firebase/compat/app';
 import "firebase/compat/firestore";
 
@@ -48,6 +47,7 @@ function Posts({ postId, user, userName, caption, imageURL }) {
             username: user.displayName,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         })
+    
         setNewComment('');
     }
 
@@ -86,16 +86,15 @@ function Posts({ postId, user, userName, caption, imageURL }) {
             />
 
             <p className="post__text">
-                <b>{userName}</b> {caption}
+                <b>{userName}</b> {caption}<br></br>
             </p>
 
             <div className="post__comments">
                 {comments.map(({ id, comment }) => (
                     <>
                         <p key={id}>
-                            <b>{comment.username}</b>: &nbsp;{comment.text}
+                            <b>{comment.username}</b>: &nbsp;{comment.text}<br></br>
                         </p>
-
                     </>
                 ))}
 
@@ -104,13 +103,14 @@ function Posts({ postId, user, userName, caption, imageURL }) {
                     (comment.username === user.displayName || user.displayName === userName) &&
                     <p key={id}>
                         <EditIcon style={{ color: 'blue' }} onClick={() => { handleEdit(id, comment.text) }} />
+                        <br></br>
                         <DeleteOutlineIcon style={{ color: 'red' }} onClick={() => {
                             db.collection("posts")
                                 .doc(postId)
                                 .collection("comments")
                                 .doc(id).delete()
                         }} />
-
+                    <br></br>
                     </p>
 
                 ))}

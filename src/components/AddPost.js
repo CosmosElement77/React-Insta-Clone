@@ -61,7 +61,7 @@ function AddPost({ username }) {
 
             <input className='file-input' type="file" onChange={handleChange} />
             <br />
-            <TextField id="filled-basic" label="Caption here" variant="filled" onChange={event => setCaption(event.target.value)} value={caption} />
+            <TextField id="filled-basic" style={{zIndex: '1'}} label="Caption here" variant="filled" onChange={event => setCaption(event.target.value)} value={caption} />
             <br />
 
             < progress className="progress" value={progress} max="100" />
